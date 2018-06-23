@@ -1,0 +1,28 @@
+<div id="container" [ngStyle]="{'width.px': inputWidth}">
+    <div id="input_box"
+         [ngStyle]="{'width.px': inputWidth}"
+         (click)="onInputClick($event)">
+        <span class="sel_item" *ngFor="let sel of _value; let i = index">
+            <span>{{sel}}</span>
+            <i (click)="deleteItem($event, i)">×</i>
+        </span>
+    </div>
+    <div id="panel"
+         *ngIf="panelVisible"
+         (click)="onPanelClick($event)">
+        <div>
+            <input id="type_area" placeholder="输入商家名称" autofocus ngModel (ngModelChange)="typeFlow.next($event)"/>
+            <span id="select_all" (click)="selectAll()">全选</span>
+        </div>
+        <div>
+            <div class="item"
+                 [ngClass]="{'selected': _value.indexOf(item) > -1}"
+                 *ngFor="let item of searchResult; trackBy: trackByIndex; let i = index"
+                 (click)="onItemClick(item)">
+                <div class="fa"
+                     [ngClass]="{'fa-square-o': _value.indexOf(item) < 0, 'fa-check-square': _value.indexOf(item) > -1}"></div>
+                <div>{{item}}</div>
+            </div>
+        </div>
+    </div>
+</div>
